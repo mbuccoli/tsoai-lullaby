@@ -129,3 +129,4 @@ dmypy.json
 .pyre/
 lullaby-venv/**
 lullaby-venv/*
+pretrained_models/**

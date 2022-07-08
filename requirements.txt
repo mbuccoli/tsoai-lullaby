@@ -2,3 +2,5 @@ numpy
 scipy
 ipykernel
 pretty_midi
+spleeter
+basic-pitch
