@@ -9,3 +9,5 @@ Adapt the path variables in the `separator.py` file.
 [optional] Also adapt the other variables depending on how many splits you want and which backend STFT.
 
 Run `separator.py`.
+
+REMARK: the first time you run a model, it needs to be downloaded. It will be stored in a folder named `pretrained_models`.
