@@ -261,6 +261,7 @@ def predict(
         minimum_note_length: float = 58,
         minimum_frequency: Optional[float] = None,
         maximum_frequency: Optional[float] = None,
+        include_pitch_bends: bool = True,
         melodia_trick: bool = True,
         debug_file: Optional[pathlib.Path] = None,
 ) -> Tuple[Dict[str, np.array], pretty_midi.PrettyMIDI, List[Tuple[float, float, int, float, Optional[List[int]]]]]:
@@ -292,18 +293,18 @@ def predict(
         model_output = run_inference(audio_path, model, debug_file)
 
         min_note_len = int(np.round(minimum_note_length / 1000 * (AUDIO_SAMPLE_RATE / FFT_HOP)))
-#        parameters = {
-#            'output': model_output,
-#            'onset_thresh': onset_threshold,
-#            'frame_thresh': frame_threshold,
-#            'infer_onsets': True,
-#            'min_note_len': min_note_len,  # convert to frames
-#            'min_freq': minimum_frequency,
-#            'max_freq': maximum_frequency,
-#            'include_pitch_bends': False,
-#            'multiple_pitch_bends': False,
-#            'melodia_trick': melodia_trick,
-#        }
+        #        parameters = {
+        #            'output': model_output,
+        #            'onset_thresh': onset_threshold,
+        #            'frame_thresh': frame_threshold,
+        #            'infer_onsets': True,
+        #            'min_note_len': min_note_len,  # convert to frames
+        #            'min_freq': minimum_frequency,
+        #            'max_freq': maximum_frequency,
+        #            'include_pitch_bends': False,
+        #            'multiple_pitch_bends': False,
+        #            'melodia_trick': melodia_trick,
+        #        }
 
         # print(parameters)
 
@@ -315,7 +316,7 @@ def predict(
             min_note_len=min_note_len,  # convert to frames
             min_freq=minimum_frequency,
             max_freq=maximum_frequency,
-            include_pitch_bends=True,
+            include_pitch_bends=include_pitch_bends,
             # multiple_pitch_bends=False,
             melodia_trick=melodia_trick,
         )
@@ -360,6 +361,7 @@ def predict_and_save(
         minimum_note_length: float = 58,
         minimum_frequency: Optional[float] = None,
         maximum_frequency: Optional[float] = None,
+        include_pitch_bends: bool = True,
         melodia_trick: bool = True,
         debug_file: Optional[pathlib.Path] = None,
 ) -> None:
@@ -394,6 +396,7 @@ def predict_and_save(
                 minimum_note_length,
                 minimum_frequency,
                 maximum_frequency,
+                include_pitch_bends,
                 melodia_trick,
                 debug_file,
             )

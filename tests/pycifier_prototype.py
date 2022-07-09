@@ -32,6 +32,7 @@ if __name__ == '__main__':
     minimum_note_length = parser.add_argument('--minimum_note_length', '-mnl', type=int, help="Minimum note length", default=58)
     minimum_frequency = parser.add_argument('--minimum_frequency', '-mf', type=Optional[float], help="minimum frequecy", default=None)
     maximum_frequency = parser.add_argument('--maximum_frequency', '-Mf', type=Optional[float], help="Maximum frequency", default=None)
+    include_pitch_bends = parser.add_argument('--include_pitch_bends', '-pb', type=Optional[float], help="Include pitch bends", default=None)
     melodia_trick = parser.add_argument('--melodia_trick', '-mt', type=bool, help="Melodia trick", default=None)
 
 
@@ -46,6 +47,7 @@ if __name__ == '__main__':
     minimum_note_length = args.minimum_note_length
     minimum_frequency = args.minimum_frequency
     maximum_frequency = args.maximum_frequency
+    include_pitch_bends = args.include_pitch_bends
     melodia_trick = args.melodia_trick
 
     # TODO check that stuff exists
