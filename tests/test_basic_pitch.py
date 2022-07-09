@@ -1,6 +1,9 @@
 import os
 from pathlib import Path
 import sys
+
+from basic_pitch import ICASSP_2022_MODEL_PATH
+
 print(sys.executable)
 from basic_pitch.inference import predict_and_save
 
