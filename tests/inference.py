@@ -316,7 +316,7 @@ def predict(
             min_freq=minimum_frequency,
             max_freq=maximum_frequency,
             include_pitch_bends=True,
-            multiple_pitch_bends=False,
+            # multiple_pitch_bends=False,
             melodia_trick=melodia_trick,
         )
 
