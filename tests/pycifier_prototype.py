@@ -1,4 +1,5 @@
 import os
+os.environ['TF_CPP_MIN_LOG_LEVEL'] = '3' 
 from pathlib import Path
 from typing import Optional
 from separate_simple_track import bash_separator
@@ -24,8 +25,8 @@ if __name__ == '__main__':
 
     parser.add_argument('--input_audio', '-ia', type=str,
                         help="Path to the audio file to be processed.", default=SONG_FILE)
-    parser.add_argument('--output_path', '-o', type=str, help="Path where to save the final file.",
-                        default=SONG_DIR)
+    parser.add_argument('--output_path', '-o', type=str, help="Path where to save the final file; default is the same directory of the input_audio.",
+                        default="")
 
     onset_threshold = parser.add_argument('--onset_threshold', '-ot', type=float, help="Onset threshold", default=0.6)
     frame_threshold = parser.add_argument('--frame_threshold', '-ft', type=float, help="Frame threshold", default=0.3)
@@ -40,6 +41,8 @@ if __name__ == '__main__':
     input_audio = args.input_audio
 
     saving_folder = args.output_path
+    if saving_folder=="":
+        saving_folder=os.path.join(os.path.split(input_audio)[0],"..")
     song_name, _ = os.path.splitext(os.path.split(input_audio)[-1])
     print(song_name)
     onset_threshold = args.onset_threshold
@@ -51,14 +54,17 @@ if __name__ == '__main__':
     melodia_trick = args.melodia_trick
 
     # TODO check that stuff exists
-    print('Separating vocals...')
+    assert os.path.exists(input_audio), f"{input_audio} does not exist!" 
+    assert os.path.exists(saving_folder), f"{saving_folder} does not exist!"
+
+    print('Separating vocals👄 from accompaniement🎶...')
     bash_separator(
         song_path=input_audio,
         output_path=saving_folder,
     )
 
-    print('...done!')
-    print('Converting to midi...')
+    print('...done!☑️')
+    print('Converting to midi🎼...')
     my_predict_and_save(
         audio_path_list=[os.path.join(saving_folder, song_name, 'vocals.wav'), ],
         output_directory=saving_folder,
@@ -76,15 +82,15 @@ if __name__ == '__main__':
         melodia_trick=melodia_trick,
         debug_file=None,
     )
-    print('...done!')
-    print('Slowing down and synthetizing...')
+    print('...done!☑️')
+    print('Slowing down and synthetizing...👶💤')
     data_slow, voice_instr = open_and_slow_down(
         midi_fn=os.path.join(saving_folder, 'vocals_basic_pitch.mid'),
         out_fn=os.path.join(saving_folder, 'lullaby.wav'),
         id_instr="all",
-        mid_out_fn="",  # os.path.join(saving_folder, 'midi.wav')
+        mid_out_fn=os.path.join(saving_folder, 'midi_synth.wav')
     )
 
-    print('...done!')
+    print('...done!☑️')
 
     print('All done, bye!')
