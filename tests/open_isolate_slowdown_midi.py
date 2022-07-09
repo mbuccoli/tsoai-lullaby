@@ -36,7 +36,6 @@ def open_and_slow_down(midi_fn, out_fn, id_instr="all", mid_out_fn=""):
     - out_fn: filename of the output wav file
     - id_instr: the instrument track to take; if "ask" will ask the user, if "all" will combine all together. Define is all
     - mid_out_fn: outputs the wav file before the slowing
-
     """
     # Load MIDI file into PrettyMIDI object
     midi_data = pretty_midi.PrettyMIDI(str(midi_fn))
