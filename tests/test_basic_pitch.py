@@ -10,10 +10,20 @@ OUTPUT_PATH = RES_DIR
 
 
 predict_and_save(
-    [str(SONG_PATH),],
-    str(OUTPUT_PATH),
-    True,# save-midi,
-    False,#<sonify-midi>,
-    False,#<save-model-outputs>,
-    False,#<save-note-events>,
+# mandatory parameters
+    audio_path_list= [str(SONG_PATH),],
+    output_directory=str(OUTPUT_PATH),
+    save_midi=True,
+    sonify_midi=False,
+    save_model_outputs=False,
+    save_notes=False,
+# optional parameters
+    model_path=ICASSP_2022_MODEL_PATH,
+    onset_threshold=0.5,
+    frame_threshold=0.3,
+    minimum_note_length=58,
+    minimum_frequency=None,
+    maximum_frequency=None,
+    melodia_trick=True,
+    debug_file=None,
 )
