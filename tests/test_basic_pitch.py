@@ -7,8 +7,10 @@ from basic_pitch import ICASSP_2022_MODEL_PATH
 print(sys.executable)
 from basic_pitch.inference import predict_and_save
 
+
+SONG_NAME = '0009fFIM1eYThaPg'
 RES_DIR=Path(os.environ["TSOAI_HACK_LULLABY_RESOURCES"])
-SONG_PATH = RES_DIR/'baby_one_more_time/vocals.wav'
+SONG_PATH = RES_DIR/SONG_NAME/'vocals.wav'
 OUTPUT_PATH = RES_DIR
 
 
