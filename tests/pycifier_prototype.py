@@ -7,7 +7,7 @@ from basic_pitch import ICASSP_2022_MODEL_PATH
 
 from open_isolate_slowdown_midi import open_and_slow_down
 
-SONG_NAME = 'test'
+SONG_NAME = 'cheryl_colee_rain_on_me'
 EXTENSION = '.mp3'
 SONG_FILE = SONG_NAME + EXTENSION
 RES_DIR = Path(os.environ["TSOAI_HACK_LULLABY_RESOURCES"])
