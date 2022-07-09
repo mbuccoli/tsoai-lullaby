@@ -1,6 +1,6 @@
 import os
 from pathlib import Path
-from basic_pitch.inference import predict_and_save
+from inference import predict_and_save
 from basic_pitch import ICASSP_2022_MODEL_PATH
 
 #RES_DIR=Path(os.environ["TSOAI_HACK_LULLABY_RESOURCES"])

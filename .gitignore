@@ -130,3 +130,5 @@ dmypy.json
 lullaby-venv/**
 lullaby-venv/*
 pretrained_models/**
+tests/pretrained_models/*
+resources
