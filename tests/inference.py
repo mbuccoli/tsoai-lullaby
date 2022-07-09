@@ -292,20 +292,21 @@ def predict(
         model_output = run_inference(audio_path, model, debug_file)
 
         min_note_len = int(np.round(minimum_note_length / 1000 * (AUDIO_SAMPLE_RATE / FFT_HOP)))
-        parameters = {
-            'output': model_output,
-            'onset_thresh': onset_threshold,
-            'frame_thresh': frame_threshold,
-            'infer_onsets': True,
-            'min_note_len': min_note_len,  # convert to frames
-            'min_freq': minimum_frequency,
-            'max_freq': maximum_frequency,
-            'include_pitch_bends': False,
+#        parameters = {
+#            'output': model_output,
+#            'onset_thresh': onset_threshold,
+#            'frame_thresh': frame_threshold,
+#            'infer_onsets': True,
+#            'min_note_len': min_note_len,  # convert to frames
+#            'min_freq': minimum_frequency,
+#            'max_freq': maximum_frequency,
+#            'include_pitch_bends': False,
 #            'multiple_pitch_bends': False,
-            'melodia_trick': melodia_trick,
-        }
+#            'melodia_trick': melodia_trick,
+#        }
 
-        print(parameters)
+        # print(parameters)
+
         midi_data, note_events = infer.model_output_to_notes(
             output=model_output,
             onset_thresh=onset_threshold,
@@ -314,8 +315,8 @@ def predict(
             min_note_len=min_note_len,  # convert to frames
             min_freq=minimum_frequency,
             max_freq=maximum_frequency,
-            include_pitch_bends=False,
-            # multiple_pitch_bends=False,
+            include_pitch_bends=True,
+            multiple_pitch_bends=False,
             melodia_trick=melodia_trick,
         )
 
