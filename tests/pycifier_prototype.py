@@ -3,8 +3,6 @@ os.environ['TF_CPP_MIN_LOG_LEVEL'] = '3'
 from pathlib import Path
 from typing import Optional
 from separate_simple_track import bash_separator
-from test_basic_pitch import my_predict_and_save
-from basic_pitch import ICASSP_2022_MODEL_PATH
 
 from open_isolate_slowdown_midi import open_and_slow_down
 import argparse
@@ -21,7 +19,7 @@ VOCALS_MIDI_PATH = SONG_DIR / 'vocals_basic_pitch.mid'
 SLOW_VOCALS_MIDI_PATH = SONG_DIR / 'slow.wav'
 
 if __name__ == '__main__':
-    parser = argparse.ArgumentParser()
+    parser = argparse.ArgumentParser(formatter_class=argparse.ArgumentDefaultsHelpFormatter)
 
     parser.add_argument('--input_audio', '-ia', type=str,
                         help="Path to the audio file to be processed.", default=SONG_FILE)
@@ -42,8 +40,8 @@ if __name__ == '__main__':
 
     saving_folder = args.output_path
     if saving_folder=="":
-        saving_folder=os.path.join(os.path.split(input_audio)[0],"..")
-    song_name, _ = os.path.splitext(os.path.split(input_audio)[-1])
+        saving_folder, song_name=os.path.split(input_audio)
+    song_name, _ = os.path.splitext(song_name)
     print(song_name)
     onset_threshold = args.onset_threshold
     frame_threshold = args.frame_threshold
@@ -58,15 +56,23 @@ if __name__ == '__main__':
     assert os.path.exists(saving_folder), f"{saving_folder} does not exist!"
 
     print('Separating vocals👄 from accompaniement🎶...')
-    bash_separator(
-        song_path=input_audio,
-        output_path=saving_folder,
-    )
-
+    out_spleeter_vocals=os.path.join(saving_folder, song_name, "vocals.wav")
+    if not os.path.exists(out_spleeter_vocals):
+        bash_separator(
+            song_path=input_audio,
+            output_path=saving_folder,
+        )
     print('...done!☑️')
+
+
+
     print('Converting to midi🎼...')
+    # move here to speed up the help
+    from test_basic_pitch import my_predict_and_save
+    from basic_pitch import ICASSP_2022_MODEL_PATH
+
     my_predict_and_save(
-        audio_path_list=[os.path.join(saving_folder, song_name, 'vocals.wav'), ],
+        audio_path_list=[out_spleeter_vocals, ],
         output_directory=saving_folder,
         save_midi=True,
         sonify_midi=False,
