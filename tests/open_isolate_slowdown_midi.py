@@ -113,8 +113,8 @@ def open_and_slow_down(midi_fn, out_fn, id_instr="all", mid_out_fn=""):
 
     # uncomment if you want to hear the normal version
     if mid_out_fn != "":
-        data_normal = voice_instr.synthesize(SR)
-        sf.write(mid_out_fn, to_int16(data_normal, 0.707), SR)
+        data_normal, sr = synthesize_samples(voice_instr.notes)
+        sf.write(mid_out_fn, to_int16(data_normal, 0.707), sr)
 
     # %% Slow everything down   
     voice_instr.notes = slowdown(voice_instr.notes)
