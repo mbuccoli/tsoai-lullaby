@@ -1,6 +1,6 @@
 import os
 from pathlib import Path
-
+from typing import Optional
 from separate_simple_track import bash_separator
 from test_basic_pitch import my_predict_and_save
 from basic_pitch import ICASSP_2022_MODEL_PATH
@@ -27,12 +27,26 @@ if __name__ == '__main__':
     parser.add_argument('--output_path', '-o', type=str, help="Path where to save the final file.",
                         default=SONG_DIR)
 
+    onset_threshold = parser.add_argument('--onset_threshold', '-ot', type=float, help="Onset threshold", default=0.6)
+    frame_threshold = parser.add_argument('--frame_threshold', '-ft', type=float, help="Frame threshold", default=0.3)
+    minimum_note_length = parser.add_argument('--minimum_note_length', '-mnl', type=int, help="Minimum note length", default=58)
+    minimum_frequency = parser.add_argument('--minimum_frequency', '-mf', type=Optional[float], help="minimum frequecy", default=None)
+    maximum_frequency = parser.add_argument('--maximum_frequency', '-Mf', type=Optional[float], help="Maximum frequency", default=None)
+    melodia_trick = parser.add_argument('--melodia_trick', '-mt', type=bool, help="Melodia trick", default=None)
+
+
     args = parser.parse_args()
     input_audio = args.input_audio
 
     saving_folder = args.output_path
     song_name, _ = os.path.splitext(os.path.split(input_audio)[-1])
     print(song_name)
+    onset_threshold = args.onset_threshold
+    frame_threshold = args.frame_threshold
+    minimum_note_length = args.minimum_note_length
+    minimum_frequency = args.minimum_frequency
+    maximum_frequency = args.maximum_frequency
+    melodia_trick = args.melodia_trick
 
     # TODO check that stuff exists
     print('Separating vocals...')
@@ -52,12 +66,12 @@ if __name__ == '__main__':
         save_notes=False,
         # optional parameters
         model_path=ICASSP_2022_MODEL_PATH,
-        onset_threshold=0.6,
-        frame_threshold=0.3,
-        minimum_note_length=100,
-        minimum_frequency=None,
-        maximum_frequency=None,
-        melodia_trick=True,
+        onset_threshold=onset_threshold,
+        frame_threshold=frame_threshold,
+        minimum_note_length=minimum_note_length,
+        minimum_frequency=minimum_frequency,
+        maximum_frequency=maximum_frequency,
+        melodia_trick=melodia_trick,
         debug_file=None,
     )
     print('...done!')
