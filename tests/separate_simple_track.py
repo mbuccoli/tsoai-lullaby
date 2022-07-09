@@ -1,17 +1,14 @@
 import os
 from pathlib import Path
-from spleeter.separator import Separator
-from spleeter.audio.adapter import AudioAdapter
 
+SONG_NAME = 'test.mp3'
+RES_DIR = Path(os.environ["TSOAI_HACK_LULLABY_RESOURCES"])
+SONG_PATH = RES_DIR / SONG_NAME
+OUTPUT_PATH = RES_DIR
 
-# This environment variables point to the "resources" directory 
-# in our google drive
-RES_DIR=Path(os.environ["TSOAI_HACK_LULLABY_RESOURCES"])
-
-SONG_PATH = RES_DIR/'baby_one_more_time.mp3'
 BACKEND = 'tensorflow'  # ["librosa"]
 MODEL = 'spleeter:2stems'  # , 'spleeter:4stems', 'spleeter:5stems']
-OUTPUT_PATH = RES_DIR
+
 
 # Check just if separator works
 # Models need to be downloaded first
@@ -26,7 +23,6 @@ def bash_separator(song_path, output_path) -> None:
     """
 
     os.system(f"spleeter separate -o {output_path} {song_path}")
-
 
 
 if __name__ == '__main__':
