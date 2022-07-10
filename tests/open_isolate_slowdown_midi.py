@@ -31,11 +31,11 @@ def to_int16(x, gain):
 
 # def synthesize(notes, sample_directory, sample_format)
 
-def slowdown(notes):
+def slowdown(notes, slowdown_rate=2):
     new_notes = []
     for note in notes:
         new_note = pretty_midi.Note(note.velocity, note.pitch,
-                                    2 * note.start, 2 * note.end)
+                                    slowdown_rate * note.start, slowdown_rate * note.end)
         new_notes.append(new_note)
         assert new_note.duration == new_note.end - new_note.start
     return new_notes
@@ -79,7 +79,7 @@ def synthesize_samples(notes, sample_directory=RES_DIR / "24Samples",
     return y, sr
 
 
-def open_and_slow_down(midi_fn, out_fn, id_instr="all", mid_out_fn=""):
+def open_and_slow_down(midi_fn, out_fn, id_instr="all", mid_out_fn="", slowdown_rate=2):
     """
     Open midi and slows it down, removing bending, writes the outout wav
     - midi fn: filename of the input midi
@@ -117,13 +117,13 @@ def open_and_slow_down(midi_fn, out_fn, id_instr="all", mid_out_fn=""):
         sf.write(mid_out_fn, to_int16(data_normal, 0.707), sr)
 
     # %% Slow everything down   
-    voice_instr.notes = slowdown(voice_instr.notes)
+    voice_instr.notes = slowdown(voice_instr.notes, slowdown_rate=slowdown_rate)
 
     # data_slow=voice_instr.synthesize(SR)
     data_slow, SR = synthesize_samples(voice_instr.notes)
     # up to 64 notes because of reasons
     sf.write(out_fn, to_int16(data_slow, 0.707), SR)
-    return data_slow, voice_instr
+    return data_slow, voice_instr, SR
 
 
 # %%
