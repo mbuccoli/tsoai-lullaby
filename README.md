@@ -4,7 +4,7 @@
  is a tool for converting the melody of any song into a lullaby to put your baby to sleep. For a quickstart demo on how to use 👶 Pacifier 💤, have a look
 at [this notebook](https://nbviewer.org/github/mbuccoli/tsoai-lullaby/blob/main/demo.ipynb).
 
-It was developed by Bryan, [Chi-Chun](https://github.com/vic22981106), [Marta](https://github.com/mmosc), and [Mike](https://mbuccoli.github.io/) 
+It was developed by [Bryan](bpfenchel@dons.usfca.edu), [Chi-Chun](https://www.linkedin.com/in/chi-chun-luo-7714a8213/), [Marta](https://github.com/mmosc), and [Mike](https://mbuccoli.github.io/) 
 as a project for
 the [1st The Sound of AI Hackaton](https://musikalkemist.github.io/thesoundofaihackathon/).
 
