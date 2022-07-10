@@ -51,7 +51,7 @@ def synthesize_samples(notes, sample_directory=RES_DIR / "24Samples",
     notes_rescaled = []
     min_pitch = np.min(pitches_unique)
     max_end = 0
-    for note in slowdown(notes):
+    for note in notes:
         new_note = pretty_midi.Note(note.velocity, ((note.pitch - min_pitch) % 24) + 1, note.start, note.end)
         notes_rescaled.append(new_note)
         if new_note.pitch == 25:
