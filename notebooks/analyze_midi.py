@@ -78,7 +78,7 @@ plt.plot(t,np.abs(re_synth_slow_lp[i_l:i_r]))
 
 # %%
 noise_pars={
-    "SNR_range":[-30, -18], # what's the SNR w.r.t. the lullaby?
+    "SNR_range":[10, 30], # what's the SNR w.r.t. the lullaby?
     "dur_range":[3, 10], # duration of each noise wave
     "overlap_secs":[0.2, 1], # second of overlap between two waves
     "lp_factor_range":[0.01, 0.2], # rates for low-pass filters 
@@ -122,14 +122,19 @@ while k < white_noise_array.size:
     # computing gain to scale noise to a given snr
     energy_noise=np.std(noise_i[:max_N])
     energy_sig=np.std(lullaby_lp_reverb[k:k+max_N])
-
     cur_SNR_dB=20*np.log10(energy_sig/energy_noise)
     diff_SNR = np.power(10, (target_SNR_dB - cur_SNR_dB)/20)
-    #assert diff_SNR<1, "Problem"
-    noise_i=noise_i*diff_SNR
+    print("\t", energy_sig, energy_noise,  cur_SNR_dB,1/diff_SNR)
     
-    # summing the noise_i component
+    
+    #assert diff_SNR<1, "Problem"
+
+    noise_i=noise_i*(1/diff_SNR)
+    
+    # summing the noise_i component in the white_noise array
     white_noise_array[k:k+max_N]=white_noise_array[k:k+max_N]+noise_i[:max_N]
+
+    # updating k takes into account the overlap
     k+=noise_i.size-overlap_sample
 
 sf.write(RES_DIR/"test_midi"/"lullaby_lp_rev_sea.wav", 
