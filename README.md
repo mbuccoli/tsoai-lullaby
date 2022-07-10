@@ -1,4 +1,4 @@
-# Pacifier
+# Pacifier 
 
 Pacifier is a tool for converting the melody of any song into a lullaby to put your baby to sleep.
 
@@ -36,8 +36,8 @@ for isolating the melody. Those will be stored in a subfolder named `pretrained_
 
 The conversion to lullaby consists of several steps:
 
-- Separating the melody from the accompaniment
-- Converting the melody to midi
+- Separating the melody from the accompaniment with [spleeter](https://research.deezer.com/projects/spleeter.html)
+- Converting the melody to midi with [basic pitch](https://basicpitch.spotify.com/)
 - Slow-down the melody
 - Synthesize the melody
 - Add post-processing effect (low-pass filter, reverb, wave effects)
@@ -68,3 +68,8 @@ the conversion parameters by passing the following optional arguments:
 By default, Pacifier will create several additional files in the folder where the original audio is stored. The final 
 lullaby is stored in the very same directory, with the name `lullaby_final.wav`. Additionally, files from the intermediate 
 steps are stored, so feel free to explore them to investigate the individual steps!
+
+## Contribute
+There are many ways in which you can contribute to Pacifier! As a rule of thumb, first have a look at the issue to 
+check which ones are open. We are still in the development/brainstorming process, so the issues are nonexhaustive and, 
+of course, we are open to suggestions!
