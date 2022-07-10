@@ -61,8 +61,8 @@ the conversion parameters by passing the following optional arguments:
 
 | Parameter                                         | Command |
 |---------------------------------------------------|---------|
-| Note onset threshold (`float`=0.6)                |       `--onset_threshold` |
-| Minimum note length (`int`=58)                    |     `--minimum_note_length` |
+| Note onset threshold (`float`=`0.6`)                |       `--onset_threshold` |
+| Minimum note length (`int`=`58`)                    |     `--minimum_note_length` |
 | Minimum note frequency (Optional[`float`]=`None`) |    `--minimum_frequency` |
 | Maximum note frequency(Optional[`float`]=`None`)  |     `--maximum_frequency` |
 | Include pitch bends (`bool`=`None`)               |    `--include_pitch_bends` |
