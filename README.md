@@ -1,8 +1,10 @@
 # Pacifier 
 
-Pacifier is a tool for converting the melody of any song into a lullaby to put your baby to sleep.
+Pacifier is a tool for converting the melody of any song into a lullaby to put your baby to sleep. For a quickstart demo on how to use Pacifier, have a look
+at [this notebook](https://nbviewer.org/github/mbuccoli/tsoai-lullaby/blob/main/demo.ipynb).
 
-It was developed as a project for
+It was developed by Bryan, [Chi-Chun](https://github.com/vic22981106), [Marta](https://github.com/mmosc), and [Mike](https://mbuccoli.github.io/) 
+as a project for
 the [1st The Sound of AI Hackaton](https://musikalkemist.github.io/thesoundofaihackathon/).
 
 ## Requirements
@@ -27,6 +29,7 @@ This will install the following packages to your virtual environment (and depend
 - [pretty_midi](https://craffel.github.io/pretty-midi/)
 - [spleeter](https://research.deezer.com/projects/spleeter.html)
 - [basic-pitch](https://basicpitch.spotify.com/)
+- [soundfile](http://soundfile.sapp.org/)
 
 You also need to have `ffmpeg`, `libsndfile`, and `sox` installed on your computer.
 Additionally, the first time you run pacifier, it needs download the spleeter pre-trained model
