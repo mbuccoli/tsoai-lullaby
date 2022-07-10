@@ -21,54 +21,54 @@ def rand_N(range_x, N):
 
 
 def add_noise(signal, sr):
-    noise_pars={
-        "SNR_range":[10, 30], # what's the SNR w.r.t. the lullaby?
-        "dur_range":[3, 10], # duration of each noise wave
-        "overlap_secs":[0.2, 1], # second of overlap between two waves
-        "lp_factor_range":[0.01, 0.2], # rates for low-pass filters 
+    noise_pars = {
+        "SNR_range": [10, 30],  # what's the SNR w.r.t. the lullaby?
+        "dur_range": [3, 10],  # duration of each noise wave
+        "overlap_secs": [0.2, 1],  # second of overlap between two waves
+        "lp_factor_range": [0.01, 0.2],  # rates for low-pass filters
     }
-     
-    
-    white_noise_array=np.zeros(signal.size) # zeroes with the array
-    k=0 # starting with the first sample
+
+    white_noise_array = np.zeros(signal.size)  # zeroes with the array
+    k = 0  # starting with the first sample
 
     while k < white_noise_array.size:
         # computing random parameter
-        dur_noise=rand_N(noise_pars["dur_range"],1000) 
-        lp_rate=rand_N(noise_pars["lp_factor_range"],10000)
-        target_SNR_dB=rand_N(noise_pars["SNR_range"],10)
-        overlap_sec=rand_N(noise_pars["overlap_secs"],10)
-        overlap_sample=int(overlap_sec*sr)
-        
+        dur_noise = rand_N(noise_pars["dur_range"], 1000)
+        lp_rate = rand_N(noise_pars["lp_factor_range"], 10000)
+        target_SNR_dB = rand_N(noise_pars["SNR_range"], 10)
+        overlap_sec = rand_N(noise_pars["overlap_secs"], 10)
+        overlap_sample = int(overlap_sec * sr)
+
         # generate the noise with 1 second more of length 
         # I am directly applying lowpass, so removing the first 1second will
         # avoid smooth transition
-        noise_i=lp(np.random.normal(0, 1, int((1+dur_noise)*sr)), lp_rate)
-        noise_i=noise_i[sr:] 
+        noise_i = lp(np.random.normal(0, 1, int((1 + dur_noise) * sr)), lp_rate)
+        noise_i = noise_i[sr:]
 
-        N=noise_i.size
-        ampl=np.sin(np.linspace(0,np.pi, N))  # sine between 0 to 1 and back to 0 in N samples
-        noise_i=noise_i*ampl
+        N = noise_i.size
+        ampl = np.sin(np.linspace(0, np.pi, N))  # sine between 0 to 1 and back to 0 in N samples
+        noise_i = noise_i * ampl
 
         # samples will be betweek k and k+max_N
-        max_N=min(white_noise_array.size-k, noise_i.size)
-        
+        max_N = min(white_noise_array.size - k, noise_i.size)
+
         # computing gain to scale noise to a given snr
-        energy_noise=np.std(noise_i[:max_N])
-        energy_sig=np.std(signal[k:k+max_N])
-        cur_SNR_dB=20*np.log10(energy_sig/energy_noise)
-        diff_SNR = np.power(10, (target_SNR_dB - cur_SNR_dB)/20)
-        
-        #assert diff_SNR<1, "Problem"
-        noise_i=noise_i*(1/diff_SNR)
-        
+        energy_noise = np.std(noise_i[:max_N])
+        energy_sig = np.std(signal[k:k + max_N])
+        cur_SNR_dB = 20 * np.log10(energy_sig / energy_noise)
+        diff_SNR = np.power(10, (target_SNR_dB - cur_SNR_dB) / 20)
+
+        # assert diff_SNR<1, "Problem"
+        noise_i = noise_i * (1 / diff_SNR)
+
         # summing the noise_i component in the white_noise array
-        white_noise_array[k:k+max_N]=white_noise_array[k:k+max_N]+noise_i[:max_N]
+        white_noise_array[k:k + max_N] = white_noise_array[k:k + max_N] + noise_i[:max_N]
 
         # updating k takes into account the overlap
-        k+=noise_i.size-overlap_sample
+        k += noise_i.size - overlap_sample
 
-    return white_noise_array+signal
+    return white_noise_array + signal
+
 
 def post_process(
         re_synth_slow,
@@ -94,8 +94,9 @@ def post_process(
     lullaby_lp_reverb, sr = sf.read(fn_out_rev)
 
     # replace all below with:
-    # lullaby_lp_reverb_sea= add_nois(lullaby_lp_reverb, sr)
-    # sf.write(fn_out, to_int16(lullaby_lp_reverb_sea, 0.7), sr)
+    lullaby_lp_reverb_sea= add_noise(lullaby_lp_reverb, sr)
+    sf.write(fn_out, to_int16(lullaby_lp_reverb_sea, 0.7), sr)
+    return
 
     noise_pars = {
         "SNR_range": [-30, -18],
@@ -103,7 +104,6 @@ def post_process(
         "overlap_secs": [0.2, 1],
         "lp_factor_range": [0.01, 0.2],
     }
-
 
     energy = np.std(lullaby_lp_reverb)
     white_noise_array = np.zeros(lullaby_lp_reverb.size)
