@@ -94,7 +94,7 @@ def post_process(
     lullaby_lp_reverb, sr = sf.read(fn_out_rev)
 
     # replace all below with:
-    lullaby_lp_reverb_sea= add_noise(lullaby_lp_reverb, sr)
+    lullaby_lp_reverb_sea = add_noise(lullaby_lp_reverb, sr)
     sf.write(fn_out, to_int16(lullaby_lp_reverb_sea, 0.7), sr)
     return
 
