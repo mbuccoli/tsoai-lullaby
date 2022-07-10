@@ -41,3 +41,12 @@ python3 pycifier_prototype.py --input_audio=<PATH_TO_YOUR_SONG>
 ```
 This will execute Pacifier with its default parameters. Additionally, you can customize 
 the conversion parameters by passing the following optional arguments:
+
+| Parameter                                         | Command |
+|---------------------------------------------------|---------|
+| Note onset threshold (`float`=0.6)                |         |
+| Minimum note length (`int`=58)                    |         |
+| Minimum note frequency (Optional[`float`]=`None`) |         |
+| Maximum note frequency(Optional[`float`]=`None`)  |         |
+| Include pitch bends (`bool`=`None`)               |         |
+| Slowdown rate (`float`=`2.0`)                     |         |
