@@ -25,10 +25,17 @@ Additionally, the first time you run pacifier, it needs download the spleeter pr
 for isolating the melody. Those will be stored in a subfolder named `pretrained_models`.
 
 
-## Usage and pipeline
+## Pipeline
 The conversion to lullaby consists of several steps:
  - Separating the melody from the accompaniment
  - Converting the melody to midi
  - Slow-down the melody
  - Synthesize the melody
- - Add post-processing effect
+ - Add post-processing effect (low-pass filter, reverb, wave effects)
+## Tutorial and general usage
+For a quickstart demo on how to use Pacifier, have a look at [this notebook](https://nbviewer.org/github/mbuccoli/tsoai-lullaby/blob/main/demo.ipynb)
+
+Pacifier converts `.wav`, `.mp3`, and `.mid` files. To turn a song into a lullaby, run
+```shell
+python3 pycifier_prototype.py --input_audio=<PATH_TO_YOUR_SONG>
+```

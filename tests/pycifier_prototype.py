@@ -10,8 +10,8 @@ import argparse
 from post_processing import post_process
 
 
-SONG_NAME = 'cheryl_colee_rain_on_me'
-EXTENSION = '.mp3'
+SONG_NAME = 'baby_shark_cut'
+EXTENSION = '.wav'
 SONG_FILE = SONG_NAME + EXTENSION
 RES_DIR = Path(os.environ["TSOAI_HACK_LULLABY_RESOURCES"])
 SONG_DIR = RES_DIR / SONG_NAME
