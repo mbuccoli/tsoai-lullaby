@@ -7,13 +7,17 @@ from separate_simple_track import bash_separator
 from open_isolate_slowdown_midi import open_and_slow_down
 import argparse
 
-SONG_NAME = 'hot_cold_short'
+from post_processing import post_process
+
+
+SONG_NAME = 'cheryl_colee_rain_on_me'
 EXTENSION = '.mp3'
 SONG_FILE = SONG_NAME + EXTENSION
 RES_DIR = Path(os.environ["TSOAI_HACK_LULLABY_RESOURCES"])
 SONG_DIR = RES_DIR / SONG_NAME
 SONG_FILE = SONG_DIR / SONG_FILE
-
+LULLABY_LP = SONG_DIR / "lullaby_lp.wav"
+LULLABY_LP_REV = SONG_DIR / "lullaby_lp_rev.wav"
 VOCALS_WAV_PATH = SONG_DIR / 'vocals.wav'
 VOCALS_MIDI_PATH = SONG_DIR / 'vocals_basic_pitch.mid'
 SLOW_VOCALS_MIDI_PATH = SONG_DIR / 'slow.wav'
@@ -35,11 +39,14 @@ if __name__ == '__main__':
     melodia_trick = parser.add_argument('--melodia_trick', '-mt', type=bool, help="Melodia trick", default=None)
 
 
+    slowdown_rate = parser.add_argument('--slowdown_rate', '-slow', type=float, help="Slowdown rate", default=2.)
+
+
     args = parser.parse_args()
     input_audio = args.input_audio
 
     saving_folder = args.output_path
-    if saving_folder=="":
+    if saving_folder == "":
         saving_folder, song_name=os.path.split(input_audio)
     song_name, _ = os.path.splitext(song_name)
     print(song_name)
@@ -50,6 +57,7 @@ if __name__ == '__main__':
     maximum_frequency = args.maximum_frequency
     include_pitch_bends = args.include_pitch_bends
     melodia_trick = args.melodia_trick
+    slowdown_rate = args.slowdown_rate
 
     # TODO check that stuff exists
     assert os.path.exists(input_audio), f"{input_audio} does not exist!" 
@@ -90,13 +98,26 @@ if __name__ == '__main__':
     )
     print('...done!☑️')
     print('Slowing down and synthetizing...👶💤')
-    data_slow, voice_instr = open_and_slow_down(
+    data_slow, voice_instr, sr = open_and_slow_down(
         midi_fn=os.path.join(saving_folder, 'vocals_basic_pitch.mid'),
-        out_fn=os.path.join(saving_folder, 'lullaby.wav'),
+        out_fn=os.path.join(saving_folder, 'lullaby_slow.wav'),
         id_instr="all",
         mid_out_fn=os.path.join(saving_folder, 'midi_synth.wav')
     )
 
     print('...done!☑️')
+    print('Post-processing...')
 
+    fn_in = os.path.join(saving_folder, 'lullaby_lp.wav')
+    fn_out = os.path.join(saving_folder, 'lullaby_final.wav')
+
+    data_slow_reverb = post_process(
+        data_slow,
+        sr,
+        fn_in,
+        fn_out,
+        lowpass_rate=0.1,
+    )
+
+    print('...done!☑️')
     print('All done, bye!')
