@@ -1,4 +1,4 @@
-# Pacifier 
+# Pacifier 👶💤
 
 Pacifier is a tool for converting the melody of any song into a lullaby to put your baby to sleep. For a quickstart demo on how to use Pacifier, have a look
 at [this notebook](https://nbviewer.org/github/mbuccoli/tsoai-lullaby/blob/main/demo.ipynb).
