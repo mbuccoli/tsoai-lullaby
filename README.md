@@ -39,3 +39,5 @@ Pacifier converts `.wav`, `.mp3`, and `.mid` files. To turn a song into a lullab
 ```shell
 python3 pycifier_prototype.py --input_audio=<PATH_TO_YOUR_SONG>
 ```
+This will execute Pacifier with its default parameters. Additionally, you can customize 
+the conversion parameters by passing the following optional arguments:

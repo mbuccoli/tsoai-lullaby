@@ -83,7 +83,7 @@ def post_process(
 
     """
     # TODO do this with temporary files
-    re_synth_slow_lp = lp(re_synth_slow, lowpass_rate)
+    re_synth_slow_lp = lp(re_synth_slow, 1.)
     sf.write(fn_in, to_int16(re_synth_slow_lp, 0.5), sr)
 
     fn_out_rev = fn_in.replace('.wav', '_rev.wav')

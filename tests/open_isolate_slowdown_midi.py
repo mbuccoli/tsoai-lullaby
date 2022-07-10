@@ -41,7 +41,7 @@ def slowdown(notes, slowdown_rate=2):
     return new_notes
 
 
-def synthesize_samples(notes, sample_directory=RES_DIR / "24Samples",
+def synthesize_samples(notes, sample_directory=RES_DIR / "24newSamples",
                        sample_format="samples{0:02d}.wav"):
     pitches_unique = np.unique([note.pitch for note in notes])
 
@@ -132,7 +132,7 @@ if __name__ == "__main__":
 
 if False:
     # %%
-    sample_directory = RES_DIR / "24Samples"
+    sample_directory = RES_DIR / "24newSamples"
     midi_data = pretty_midi.PrettyMIDI(str(MIDI_FN))
     notes = midi_data.instruments[2].notes[:64]
     sample_format = "samples{0:02d}.wav"
