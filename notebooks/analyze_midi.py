@@ -17,7 +17,7 @@ MIDI_FN = RES_DIR / 'baby_shark' / "vocals_basic_pitch.mid"
 
 # %%
 
-sample_directory = RES_DIR / "24Samples"
+sample_directory = RES_DIR / "24newSamples"
 sample_format = "samples{0:02d}.wav"
 
 midi_data = pretty_midi.PrettyMIDI(str(MIDI_FN))

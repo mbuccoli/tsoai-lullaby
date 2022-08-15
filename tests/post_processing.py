@@ -6,8 +6,9 @@ from open_isolate_slowdown_midi import to_int16, synthesize_samples, slowdown
 import os
 import soundfile as sf
 from scipy.signal import lfilter
+from paths import RES_DIR
 
-RES_DIR = Path(os.environ["TSOAI_HACK_LULLABY_RESOURCES"])
+# RES_DIR = Path(os.environ["TSOAI_HACK_LULLABY_RESOURCES"])
 
 
 def lp(x, rate):

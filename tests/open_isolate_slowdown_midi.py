@@ -7,10 +7,10 @@ import soundfile as sf
 # import matplotlib.pyplot as plt
 
 import pretty_midi
+from paths import RES_DIR
 
-# This environment variables point to the "resources" directory 
-# in our google drive
-RES_DIR = Path(os.environ["TSOAI_HACK_LULLABY_RESOURCES"])
+SONG_NAME = 'test.mp3'
+# RES_DIR = Path(os.environ["TSOAI_HACK_LULLABY_RESOURCES"])
 MIDI_FN = RES_DIR / 'Toms_Diner.mid'
 OUT_FN = RES_DIR / "guitar_only_slow.wav"
 ID_INSTR = 2
@@ -41,7 +41,7 @@ def slowdown(notes, slowdown_rate=2):
     return new_notes
 
 
-def synthesize_samples(notes, sample_directory=RES_DIR / "24Samples",
+def synthesize_samples(notes, sample_directory=RES_DIR / "24newSamples",
                        sample_format="samples{0:02d}.wav"):
     pitches_unique = np.unique([note.pitch for note in notes])
 
@@ -132,7 +132,7 @@ if __name__ == "__main__":
 
 if False:
     # %%
-    sample_directory = RES_DIR / "24Samples"
+    sample_directory = RES_DIR / "24newSamples"
     midi_data = pretty_midi.PrettyMIDI(str(MIDI_FN))
     notes = midi_data.instruments[2].notes[:64]
     sample_format = "samples{0:02d}.wav"
