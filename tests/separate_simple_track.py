@@ -1,8 +1,9 @@
 import os
 from pathlib import Path
+from paths import RES_DIR
 
 SONG_NAME = 'test.mp3'
-RES_DIR = Path(os.environ["TSOAI_HACK_LULLABY_RESOURCES"])
+# RES_DIR = Path(os.environ["TSOAI_HACK_LULLABY_RESOURCES"])
 SONG_PATH = RES_DIR / SONG_NAME
 OUTPUT_PATH = RES_DIR
 

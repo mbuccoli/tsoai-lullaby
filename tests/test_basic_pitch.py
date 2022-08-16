@@ -2,14 +2,9 @@ import os
 from pathlib import Path
 from inference import predict_and_save
 from basic_pitch import ICASSP_2022_MODEL_PATH
-
-#RES_DIR=Path(os.environ["TSOAI_HACK_LULLABY_RESOURCES"])
-#SONG_PATH = RES_DIR/'baby_one_more_time'/'short_vocals.wav'
-#OUTPUT_PATH = RES_DIR/'baby_one_more_time'
-
+from paths import RES_DIR
 
 SONG_NAME = 'test'
-RES_DIR = Path(os.environ["TSOAI_HACK_LULLABY_RESOURCES"])
 SONG_PATH = RES_DIR / SONG_NAME / 'vocals.wav'
 OUTPUT_PATH = RES_DIR / 'vocals_basic_pitch.mid'
 

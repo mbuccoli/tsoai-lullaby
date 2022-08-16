@@ -7,10 +7,10 @@ import soundfile as sf
 # import matplotlib.pyplot as plt
 
 import pretty_midi
+from paths import RES_DIR
 
-# This environment variables point to the "resources" directory 
-# in our google drive
-RES_DIR = Path(os.environ["TSOAI_HACK_LULLABY_RESOURCES"])
+SONG_NAME = 'test.mp3'
+# RES_DIR = Path(os.environ["TSOAI_HACK_LULLABY_RESOURCES"])
 MIDI_FN = RES_DIR / 'Toms_Diner.mid'
 OUT_FN = RES_DIR / "guitar_only_slow.wav"
 ID_INSTR = 2
